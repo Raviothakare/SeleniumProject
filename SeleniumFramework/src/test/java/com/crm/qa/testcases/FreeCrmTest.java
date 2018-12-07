@@ -2,6 +2,10 @@ package com.crm.qa.testcases;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.annotation.processing.FilerException;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,11 +14,14 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class FreeCrmTest {
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 
+public class FreeCrmTest {
+	
 	static WebDriver driver;
 	static JavascriptExecutor js;
 
@@ -24,10 +31,19 @@ public class FreeCrmTest {
 		driver = new ChromeDriver();
 		js = (JavascriptExecutor) driver;
 		driver.get("https://www.freecrm.com/index.html");
+		driver.manage().window().maximize();
 	}
 
 	@Test
 	public void freeCrmTitleTest() throws InterruptedException, IOException {
+		
+	try
+		{
+		     //statements that may cause an exception
+		
+		
+		
+		
 		String title = driver.getTitle();
 		System.out.println("title is: " + title);
 		getRunTimeInfoMessage("info", title);
@@ -39,11 +55,24 @@ public class FreeCrmTest {
 			getRunTimeInfoMessage("error", "title is not correct!! BUG BUG BUG!!!");
 			takeScreenshot("freecrmloginpage");
 			Assert.assertTrue(false);
+	
 		}
-
+		
+ }catch (Exception e) {
+		System.out.println(e);
+		takeScreenshot("exceptionscreen");
+		//FreeCrmTest screenshot = new FreeCrmTest();
+		//screenshot.takeScreenshot("catchfile");	
 	}
-
-	public static void getRunTimeInfoMessage(String messageType, String message) throws InterruptedException {
+	
+		
+		
+		}
+	public static void getRunTimeInfoMessage(String messageType, String message) throws InterruptedException, IOException {
+		
+		try {
+			
+		
 		// Check for jQuery on the page, add it if need be
 		js.executeScript("if (!window.jQuery) {"
 				+ "var jquery = document.createElement('script'); jquery.type = 'text/javascript';"
@@ -70,7 +99,16 @@ public class FreeCrmTest {
 			js.executeScript("$.growl.notice({ title: 'Notice', message: '"+message+"' });");
 		}else if(messageType.equals("warning")){
 			js.executeScript("$.growl.warning({ title: 'Warning!', message: '"+message+"' });");
+			
 		}
+		}
+		catch (Exception e) {
+			System.out.println(e);
+			takeScreenshot("getRunTimeInfoMessage");
+			//FreeCrmTest screenshot = new FreeCrmTest();
+			//screenshot.takeScreenshot("catchfile");	
+		}
+		
 
 		// jquery-growl w/ colorized output
 //		js.executeScript("$.growl.error({ title: 'ERROR', message: 'Some exception is coming' });");
@@ -78,13 +116,20 @@ public class FreeCrmTest {
 //		js.executeScript("$.growl.warning({ title: 'Warning!', message: 'your warning message goes here' });");
 	}
 	
-	public static void takeScreenshot(String fileName) throws IOException{
+	@AfterMethod
+		
+	public static void takeScreenshot(String filename) throws IOException{
 		// Take screenshot and store as a file format
-		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		// now copy the screenshot to desired location using copyFile //method
-		FileUtils.copyFile(src, 
-				new File("D:\\Automation\\GITautomation\\PageObjectModel-master\\screenshots\\" + fileName +".png"));
+		//String fielname;
+		//takeScreenshot("Success after metthod");
+			File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			// Open the current date and time
+			String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
+			//Copy the screenshot on the desire location with different name using current date and time
+			FileUtils.copyFile(scrFile, new File("D:/Automation/GITautomation/PageObjectModel-master/screenshots/"+ filename +" timestamp  .png" ));			
 
 	}
 
+	
+	
 }

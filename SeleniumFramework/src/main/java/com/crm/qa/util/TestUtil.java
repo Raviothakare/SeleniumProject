@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.openqa.selenium.support.PageFactory;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -13,17 +15,19 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.crm.qa.base.TestBase;
 
 public class TestUtil extends TestBase {
 
-	public static long PAGE_LOAD_TIMEOUT = 20;
-	public static long IMPLICIT_WAIT = 20;
+	public static long PAGE_LOAD_TIMEOUT = 2;
+	public static long IMPLICIT_WAIT = 2;
 
 	public static String TESTDATA_SHEET_PATH = "D:\\Automation\\GITautomation\\PageObjectModel-master"
-			+ "\\src\\main\\java\\com\\crm\\qa\\testdata\\FreeCrmTestData.xlsx";
-
+			+ "\\src\\main\\java\\com\\crm\\qa\\testdata";
+	
 	static Workbook book;
 	static Sheet sheet;
 	static JavascriptExecutor js;
@@ -57,10 +61,16 @@ public class TestUtil extends TestBase {
 		return data;
 	}
 
-	public static void takeScreenshotAtEndOfTest() throws IOException {
-		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String currentDir = System.getProperty("user.dir");
-		FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + ".png"));
+	public static void takeScreenshot(String filename) throws IOException{
+		// Take screenshot and store as a file format
+		//String fielname;
+		//takeScreenshot("Success after metthod");
+			File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			// Open the current date and time
+			String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
+			//Copy the screenshot on the desire location with different name using current date and time
+			FileUtils.copyFile(scrFile, new File("D:/Automation/GITautomation/PageObjectModel-master/screenshots/"+ filename +" timestamp  .png" ));			
+
 	}
 
 	public static void runTimeInfo(String messageType, String message) throws InterruptedException {

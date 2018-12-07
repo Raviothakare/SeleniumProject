@@ -3,7 +3,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="main/java"/>
 	<classpathentry kind="src" path="test/java"/>
-	<classpathentry kind="lib" path="D:/Automation/ApachePOI/poi-4.0.0/poi-4.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Automation/ApachePOI/poi-4.0.0/poi-4.0.0.jar" sourcepath="D:/Automation/ApachePOI/commons-io-2.6"/>
 	<classpathentry kind="lib" path="D:/Automation/ApachePOI/poi-4.0.0/poi-examples-4.0.0.jar"/>
 	<classpathentry kind="lib" path="D:/Automation/ApachePOI/poi-4.0.0/poi-excelant-4.0.0.jar"/>
 	<classpathentry kind="lib" path="D:/Automation/ApachePOI/poi-4.0.0/poi-ooxml-4.0.0.jar"/>
@@ -47,5 +47,7 @@
 	<classpathentry kind="lib" path="D:/Automation/extent report/extentreports-java-2.41.2/lib/snakeyaml-1.15.jar"/>
 	<classpathentry kind="lib" path="D:/Automation/extent report/extentreports-java-2.41.2/lib/sqlite-jdbc-3.8.11.1.jar"/>
 	<classpathentry kind="lib" path="D:/Automation/extent report/extentreports-java-2.41.2/lib/testng-6.9.9.jar"/>
+	<classpathentry kind="lib" path="D:/Automation/ApachePOI/poi-4.0.0/ooxml-lib/curvesapi-1.05.jar"/>
+	<classpathentry kind="lib" path="D:/Automation/ApachePOI/poi-4.0.0/ooxml-lib/xmlbeans-3.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
